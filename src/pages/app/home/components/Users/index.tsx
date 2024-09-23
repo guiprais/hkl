@@ -33,6 +33,7 @@ export const Users = () => {
 
   const handleClose = () => {
     setOpen(false);
+    setCurrentUser(null);
   };
 
   if (isLoading) return <div>Carregando...</div>;
@@ -83,7 +84,11 @@ export const Users = () => {
       >
         <DialogTitle>Editar Usuário</DialogTitle>
         <DialogContent>
-          <UserForm user={currentUser ?? undefined} closeDialog={handleClose} />
+          <UserForm
+            user={currentUser ?? undefined}
+            setUser={setCurrentUser}
+            closeDialog={handleClose}
+          />
         </DialogContent>
       </Dialog>
     </>
