@@ -13,7 +13,7 @@ import {
 import { useGetUsers } from "../../../../hooks/useGetUsers";
 
 export const Users = () => {
-  const { data: users, isLoading } = useGetUsers({ _page: 1, _limit: 10 });
+  const { data: users, isLoading } = useGetUsers();
   console.log("🔥 ~ Users ~ users:", users);
 
   if (isLoading) return <div>Carregando...</div>;
