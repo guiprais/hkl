@@ -4,10 +4,8 @@ import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
-import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import * as React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -15,7 +13,6 @@ import { toast } from "sonner";
 import { ROUTES } from "../../../constants/routes";
 import { usePassword } from "../../../hooks/usePassword";
 import ColorModeSelect from "../../../lib/material/ColorModeSelect";
-import ForgotPassword from "../ForgotPassword";
 import { Card } from "./components/Card";
 import { SignInContainer } from "./components/SignInContainer";
 import { defaultValues, FormSchema, formSchema } from "./form-schema";
@@ -28,16 +25,6 @@ export function SignIn() {
     resolver: zodResolver(formSchema),
     defaultValues: defaultValues,
   });
-
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   const onSubmit = (data: FormSchema) => {
     if (data.password === password) {
@@ -110,14 +97,6 @@ export function SignIn() {
                     sx={{ display: "flex", justifyContent: "space-between" }}
                   >
                     <FormLabel htmlFor="password">Password</FormLabel>
-                    <Link
-                      component="button"
-                      onClick={handleClickOpen}
-                      variant="body2"
-                      sx={{ alignSelf: "baseline" }}
-                    >
-                      Esqueceu sua senha?
-                    </Link>
                   </Box>
                   <TextField
                     {...field}
@@ -137,8 +116,6 @@ export function SignIn() {
                 </FormControl>
               )}
             />
-
-            <ForgotPassword open={open} handleClose={handleClose} />
 
             <Button type="submit" fullWidth variant="contained">
               Entrar
