@@ -1,50 +1,93 @@
-# React + TypeScript + Vite
+# HKL - Sistema de Gerenciamento de Usuários
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este projeto utiliza React, TypeScript e Vite para criar uma aplicação de gerenciamento de usuários. A aplicação permite adicionar, editar e remover usuários, além de visualizar uma lista de todos os usuários cadastrados.
 
-Currently, two official plugins are available:
+## Login
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Email: qualquer email (admin@admin.com)
+- Senha: 123456
 
-## Expanding the ESLint configuration
+## Observações
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- A env já está configurada para rodar localmente com o JSON Server, facilitando na hora de testar o projeto.
 
-- Configure the top-level `parserOptions` property like this:
+## Tecnologias Utilizadas
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- React 18.3.1
+- TypeScript 5.5.3
+- Vite 5.4.1
+- MUI (Material-UI) 6.1.1
+- React Hook Form 7.53.0
+- Zod 3.23.8 (para validação de formulários)
+- Axios 1.7.7 (para requisições HTTP)
+- React Query 5.56.2 (para gerenciamento de estados de servidor)
+- Sonner (para notificações)
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Configuração do Projeto
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+Para rodar o projeto localmente, siga os passos abaixo:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+1. Clone o repositório:
+   ```bash
+   git clone git@github.com:guiprais/hkl.git
+   ```
+
+2. Instale as dependências:
+   ```bash
+   npm install
+   ```
+
+3. Inicie o JSON Server para simular uma API backend:
+   ```bash
+   npm run server
+   ```
+
+4. Em outro terminal, inicie o servidor de desenvolvimento:
+   ```bash
+   npm run dev
+   ```
+
+5. Para visualizar a aplicação, abra `http://localhost:5173/` no seu navegador.
+
+Para buildar o projeto:
+
+1. Execute o comando de build:
+   ```bash
+   npm run build
+   ```
+
+2. Para visualizar a build localmente, execute:
+   ```bash
+   npm run preview
+   ```
+
+3. Inicie o JSON Server para simular uma API backend:
+   ```bash
+   npm run server
+   ```
+
+4. Para visualizar a aplicação, abra `http://localhost:4173/` no seu navegador.
+
+## Estrutura do Projeto
+
+- `src/`: Contém todo o código fonte do projeto.
+  - `api/`: Contém as funções de chamadas API.
+  - `assets/`: Contém recursos estáticos como imagens, fontes e arquivos de estilo.
+  - `components/`: Contém os componentes reutilizáveis.
+  - `constants/`: Contém constantes globais usadas em todo o projeto.
+  - `hooks/`: Contém os hooks personalizados.
+  - `lib/`: Contém bibliotecas personalizadas.
+  - `pages/`: Contém as páginas da aplicação.
+    - `auth/`: Páginas relacionadas à autenticação.
+    - `app/`: Páginas internas da aplicação.
+  - `providers/`: Contém os provedores de contexto ou serviços.
+  - `routes/`: Contém as rotas da aplicação que definem a navegação.
+  - `types/`: Contém as definições de tipos TypeScript usadas no projeto.
+  - `utils/`: Contém funções utilitárias, como máscaras de formatação.
+
+## Possíveis Melhorias
+
+- [ ] Adicionar testes
+- [ ] Adicionar storybook
+- [ ] Adicionar E2E tests
+- [ ] Implementar paginação
