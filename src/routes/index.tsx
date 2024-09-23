@@ -1,5 +1,6 @@
 import { createBrowserRouter, Outlet } from "react-router-dom";
 
+import { Header } from "../components/Header";
 import { ROUTES } from "../constants/routes";
 import { Home } from "../pages/app/home";
 import { SignIn } from "../pages/auth/SignIn";
@@ -19,8 +20,14 @@ export const router = createBrowserRouter([
         element: <SignIn />,
       },
       {
-        path: ROUTES.PRIVATE,
-        element: <Home />,
+        path: "/",
+        element: <Header />,
+        children: [
+          {
+            path: ROUTES.PRIVATE,
+            element: <Home />,
+          },
+        ],
       },
     ],
   },
