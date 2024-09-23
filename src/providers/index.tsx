@@ -1,5 +1,6 @@
 import { QueryClientProvider } from "@tanstack/react-query";
 import { RouterProvider } from "react-router-dom";
+import { Toaster } from "sonner";
 
 import AppTheme from "../lib/material/AppTheme";
 import { queryClient } from "../lib/query-client";
@@ -10,6 +11,7 @@ export const AppProviders = ({ ...props }) => {
     <AppTheme {...props}>
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
+        <Toaster richColors />
       </QueryClientProvider>
     </AppTheme>
   );
