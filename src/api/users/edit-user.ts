@@ -1,7 +1,7 @@
 import { api } from "../../lib/axios";
 
 export interface IEditUserBody {
-  id: number;
+  id: string;
   name?: string;
   cpf?: string;
   email?: string;
