@@ -5,11 +5,11 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { Outlet } from "react-router-dom";
 
-import { usePassword } from "../../hooks/usePassword";
+import { useAuth } from "../../hooks/useAuth";
 import ColorModeSelect from "../../lib/material/ColorModeSelect";
 
 export const Header = () => {
-  const { logout } = usePassword();
+  const { logout } = useAuth();
 
   return (
     <>

@@ -11,14 +11,14 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 import { ROUTES } from "../../../constants/routes";
-import { usePassword } from "../../../hooks/usePassword";
+import { useAuth } from "../../../hooks/useAuth";
 import ColorModeSelect from "../../../lib/material/ColorModeSelect";
 import { Card } from "./components/Card";
 import { SignInContainer } from "./components/SignInContainer";
 import { defaultValues, FormSchema, formSchema } from "./form-schema";
 
 export function SignIn() {
-  const { password, login } = usePassword();
+  const { password, login } = useAuth();
   const navigate = useNavigate();
 
   const { control, handleSubmit } = useForm<FormSchema>({

@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-const PasswordContext = createContext<{
+const AuthContext = createContext<{
   password: string;
   savePassword: (newPassword: string) => void;
   isLogged: boolean;
@@ -8,11 +8,7 @@ const PasswordContext = createContext<{
   logout: () => void;
 } | null>(null);
 
-export const PasswordProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [password, setPassword] = useState("123456");
   const [isLogged, setIsLogged] = useState(() => {
     const isLogged = localStorage.getItem("hkl@isLogged");
@@ -36,18 +32,18 @@ export const PasswordProvider = ({
   };
 
   return (
-    <PasswordContext.Provider
+    <AuthContext.Provider
       value={{ password, savePassword, isLogged, login, logout }}
     >
       {children}
-    </PasswordContext.Provider>
+    </AuthContext.Provider>
   );
 };
 
-export const usePassword = () => {
-  const context = useContext(PasswordContext);
+export const useAuth = () => {
+  const context = useContext(AuthContext);
   if (context === null) {
-    throw new Error("usePassword must be used within a PasswordProvider");
+    throw new Error("useAuth must be used within a AuthProvider");
   }
   return context;
 };
