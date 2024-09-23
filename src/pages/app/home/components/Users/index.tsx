@@ -10,10 +10,12 @@ import {
   TableRow,
 } from "@mui/material";
 
+import { useDeleteUser } from "../../../../../hooks/useDeleteUser";
 import { useGetUsers } from "../../../../../hooks/useGetUsers";
 
 export const Users = () => {
   const { data: users, isLoading } = useGetUsers();
+  const { mutateAsync: deleteUser } = useDeleteUser();
 
   if (isLoading) return <div>Carregando...</div>;
 
@@ -42,7 +44,10 @@ export const Users = () => {
                 <IconButton color="primary">
                   <Edit />
                 </IconButton>
-                <IconButton color="secondary">
+                <IconButton
+                  color="secondary"
+                  onClick={() => deleteUser(user.id)}
+                >
                   <Delete />
                 </IconButton>
               </TableCell>
