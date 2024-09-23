@@ -4,8 +4,8 @@ export enum OrderEnum {
 }
 
 export interface IPaginatedParams {
-  page?: number;
-  perPage?: number;
-  orderBy?: string;
-  order?: OrderEnum;
+  _page?: number;
+  _limit?: number;
+  _sort?: string;
+  _order?: OrderEnum;
 }
