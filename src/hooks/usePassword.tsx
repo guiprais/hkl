@@ -1,10 +1,11 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const PasswordContext = createContext<{
   password: string;
   savePassword: (newPassword: string) => void;
   isLogged: boolean;
   login: () => void;
+  logout: () => void;
 } | null>(null);
 
 export const PasswordProvider = ({
@@ -13,7 +14,14 @@ export const PasswordProvider = ({
   children: React.ReactNode;
 }) => {
   const [password, setPassword] = useState("123456");
-  const [isLogged, setIsLogged] = useState(false);
+  const [isLogged, setIsLogged] = useState(() => {
+    const isLogged = localStorage.getItem("hkl@isLogged");
+    return isLogged === "true";
+  });
+
+  useEffect(() => {
+    localStorage.setItem("hkl@isLogged", isLogged.toString());
+  }, [isLogged]);
 
   const savePassword = (newPassword: string) => {
     setPassword(newPassword);
@@ -23,9 +31,13 @@ export const PasswordProvider = ({
     setIsLogged(true);
   };
 
+  const logout = () => {
+    setIsLogged(false);
+  };
+
   return (
     <PasswordContext.Provider
-      value={{ password, savePassword, isLogged, login }}
+      value={{ password, savePassword, isLogged, login, logout }}
     >
       {children}
     </PasswordContext.Provider>
