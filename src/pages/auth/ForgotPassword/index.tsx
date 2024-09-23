@@ -29,15 +29,7 @@ export default function ForgotPassword({
   };
 
   return (
-    <Dialog
-      open={open}
-      onClose={handleClose}
-      fullWidth
-      PaperProps={{
-        component: "form",
-        onSubmit: handleSubmit(onSubmit),
-      }}
-    >
+    <Dialog open={open} onClose={handleClose} fullWidth>
       <DialogTitle>Redefinir a senha</DialogTitle>
       <DialogContent
         sx={{ display: "flex", flexDirection: "column", gap: 2, width: "100%" }}
@@ -57,7 +49,7 @@ export default function ForgotPassword({
       </DialogContent>
       <DialogActions sx={{ pb: 3, px: 3 }}>
         <Button onClick={handleClose}>Cancelar</Button>
-        <Button variant="contained" type="submit">
+        <Button variant="contained" onClick={handleSubmit(onSubmit)}>
           Continuar
         </Button>
       </DialogActions>
