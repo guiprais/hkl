@@ -3,12 +3,10 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
-import { RouterProvider } from "react-router-dom";
-
-import { router } from "./routes";
+import { AppProviders } from "./providers";
 
 function App() {
-  return <RouterProvider router={router} />;
+  return <AppProviders />;
 }
 
 export default App;
