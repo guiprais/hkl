@@ -1,3 +1,44 @@
 {
-  "users": []
+  "users": [
+    {
+      "id": 1,
+      "name": "Ana Carolina",
+      "cpf": "123.456.789-00",
+      "email": "ana.carolina@example.com",
+      "phone": "(11) 91234-5678",
+      "address": "Rua das Flores, 123, São Paulo, SP"
+    },
+    {
+      "id": 2,
+      "name": "Bruno Silva",
+      "cpf": "987.654.321-11",
+      "email": "bruno.silva@example.com",
+      "phone": "(21) 99876-5432",
+      "address": "Avenida Atlântica, 456, Rio de Janeiro, RJ"
+    },
+    {
+      "id": 3,
+      "name": "Carla Souza",
+      "cpf": "111.222.333-44",
+      "email": "carla.souza@example.com",
+      "phone": "(31) 91234-5678",
+      "address": "Rua das Acácias, 789, Belo Horizonte, MG"
+    },
+    {
+      "id": 4,
+      "name": "Diego Fernandes",
+      "cpf": "555.666.777-88",
+      "email": "diego.fernandes@example.com",
+      "phone": "(41) 98765-4321",
+      "address": "Avenida Brasil, 1010, Curitiba, PR"
+    },
+    {
+      "id": 5,
+      "name": "Eduarda Lima",
+      "cpf": "999.888.777-66",
+      "email": "eduarda.lima@example.com",
+      "phone": "(51) 91234-5678",
+      "address": "Rua dos Pinheiros, 202, Porto Alegre, RS"
+    }
+  ]
 }
