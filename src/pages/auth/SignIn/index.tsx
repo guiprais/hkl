@@ -62,7 +62,7 @@ export function SignIn() {
             variant="h4"
             sx={{ width: "100%", fontSize: "clamp(2rem, 10vw, 2.15rem)" }}
           >
-            Sign in
+            Login
           </Typography>
           <Box
             component="form"
@@ -139,6 +139,7 @@ export function SignIn() {
             />
 
             <ForgotPassword open={open} handleClose={handleClose} />
+
             <Button type="submit" fullWidth variant="contained">
               Entrar
             </Button>
