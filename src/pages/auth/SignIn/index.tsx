@@ -10,14 +10,13 @@ import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { Controller, useForm } from "react-hook-form";
 
-import AppTheme from "../../../lib/material/AppTheme";
 import ColorModeSelect from "../../../lib/material/ColorModeSelect";
 import ForgotPassword from "../ForgotPassword";
 import { Card } from "./components/Card";
 import { SignInContainer } from "./components/SignInContainer";
 import { FormSchema, formSchema } from "./form-schema";
 
-export function SignIn(props: { disableCustomTheme?: boolean }) {
+export function SignIn() {
   const { control, handleSubmit } = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -41,7 +40,7 @@ export function SignIn(props: { disableCustomTheme?: boolean }) {
   };
 
   return (
-    <AppTheme {...props}>
+    <>
       <CssBaseline enableColorScheme />
       <SignInContainer direction="column" justifyContent="space-between">
         <ColorModeSelect
@@ -136,6 +135,6 @@ export function SignIn(props: { disableCustomTheme?: boolean }) {
           </Box>
         </Card>
       </SignInContainer>
-    </AppTheme>
+    </>
   );
 }
