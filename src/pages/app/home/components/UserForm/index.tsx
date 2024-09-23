@@ -1,13 +1,23 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Box, FormControl, TextField } from "@mui/material";
+import { Box, TextField } from "@mui/material";
+import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 
+import { StyledButton } from "../../../../../components/StyledButton";
+import { StyledFormControl } from "../../../../../components/StyledFormControl";
 import { useCreateUser } from "../../../../../hooks/useCreateUser";
-import { StyledButton } from "../StyledBox";
+import { useEditUser } from "../../../../../hooks/useEditUser";
+import { IUser } from "../../../../../types/user";
 import { defaultValues, FormSchema, formSchema } from "./form-schema";
 
-export const UserForm = () => {
+interface UserFormProps {
+  user?: IUser;
+  closeDialog?: () => void;
+}
+
+export const UserForm: React.FC<UserFormProps> = ({ user, closeDialog }) => {
   const { mutateAsync: createUser } = useCreateUser();
+  const { mutateAsync: editUser } = useEditUser();
 
   const { control, handleSubmit, reset } = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
@@ -17,19 +27,39 @@ export const UserForm = () => {
   const onSubmit = async (data: FormSchema) => {
     await createUser(data);
     reset(defaultValues);
+
+    if (user) {
+      await editUser({ ...data, id: user.id });
+    } else {
+      await createUser(data);
+    }
+    if (closeDialog) {
+      closeDialog();
+    }
   };
+
+  useEffect(() => {
+    if (user) {
+      reset(user);
+    }
+  }, [user, reset]);
 
   return (
     <Box
       component="form"
       onSubmit={handleSubmit(onSubmit)}
-      sx={{ display: "flex", gap: 2, alignItems: "start" }}
+      sx={{
+        display: "flex",
+        gap: 2,
+        alignItems: "start",
+        flexDirection: user ? "column" : "row",
+      }}
     >
       <Controller
         name="name"
         control={control}
         render={({ field, fieldState: { error } }) => (
-          <FormControl>
+          <StyledFormControl>
             <TextField
               {...field}
               fullWidth
@@ -38,7 +68,7 @@ export const UserForm = () => {
               error={!!error}
               helperText={error?.message}
             />
-          </FormControl>
+          </StyledFormControl>
         )}
       />
 
@@ -46,7 +76,7 @@ export const UserForm = () => {
         name="cpf"
         control={control}
         render={({ field, fieldState: { error } }) => (
-          <FormControl>
+          <StyledFormControl>
             <TextField
               {...field}
               fullWidth
@@ -55,7 +85,7 @@ export const UserForm = () => {
               error={!!error}
               helperText={error?.message}
             />
-          </FormControl>
+          </StyledFormControl>
         )}
       />
 
@@ -63,7 +93,7 @@ export const UserForm = () => {
         name="email"
         control={control}
         render={({ field, fieldState: { error } }) => (
-          <FormControl>
+          <StyledFormControl>
             <TextField
               {...field}
               fullWidth
@@ -72,7 +102,7 @@ export const UserForm = () => {
               error={!!error}
               helperText={error?.message}
             />
-          </FormControl>
+          </StyledFormControl>
         )}
       />
 
@@ -80,7 +110,7 @@ export const UserForm = () => {
         name="phone"
         control={control}
         render={({ field, fieldState: { error } }) => (
-          <FormControl>
+          <StyledFormControl>
             <TextField
               {...field}
               fullWidth
@@ -89,7 +119,7 @@ export const UserForm = () => {
               error={!!error}
               helperText={error?.message}
             />
-          </FormControl>
+          </StyledFormControl>
         )}
       />
 
@@ -97,7 +127,7 @@ export const UserForm = () => {
         name="address"
         control={control}
         render={({ field, fieldState: { error } }) => (
-          <FormControl>
+          <StyledFormControl>
             <TextField
               {...field}
               fullWidth
@@ -106,13 +136,30 @@ export const UserForm = () => {
               error={!!error}
               helperText={error?.message}
             />
-          </FormControl>
+          </StyledFormControl>
         )}
       />
+      <Box
+        sx={{
+          display: "flex",
+          gap: 2,
+        }}
+      >
+        <StyledButton type="submit" variant="contained" color="primary">
+          Salvar
+        </StyledButton>
 
-      <StyledButton type="submit" variant="contained" color="primary">
-        Salvar
-      </StyledButton>
+        {user && (
+          <StyledButton
+            type="button"
+            variant="outlined"
+            color="secondary"
+            onClick={closeDialog}
+          >
+            Cancelar
+          </StyledButton>
+        )}
+      </Box>
     </Box>
   );
 };
