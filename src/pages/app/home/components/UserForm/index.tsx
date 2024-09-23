@@ -8,6 +8,8 @@ import { StyledFormControl } from "../../../../../components/StyledFormControl";
 import { useCreateUser } from "../../../../../hooks/useCreateUser";
 import { useEditUser } from "../../../../../hooks/useEditUser";
 import { IUser } from "../../../../../types/user";
+import { addCpfMask } from "../../../../../utils/masks/cpf-mask";
+import { addPhoneMask } from "../../../../../utils/masks/phone-mask";
 import { defaultValues, FormSchema, formSchema } from "./form-schema";
 
 interface UserFormProps {
@@ -93,6 +95,7 @@ export const UserForm: React.FC<UserFormProps> = ({
               margin="normal"
               error={!!error}
               helperText={error?.message}
+              value={addCpfMask(field.value)}
             />
           </StyledFormControl>
         )}
@@ -127,6 +130,7 @@ export const UserForm: React.FC<UserFormProps> = ({
               margin="normal"
               error={!!error}
               helperText={error?.message}
+              value={addPhoneMask(field.value)}
             />
           </StyledFormControl>
         )}
