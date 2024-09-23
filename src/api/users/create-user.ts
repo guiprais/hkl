@@ -1,12 +1,5 @@
 import { api } from "../../lib/axios";
-
-export interface ICreateUserBody {
-  name: string;
-  cpf: string;
-  email: string;
-  phone: string;
-  address?: string;
-}
+import { ICreateUserBody } from "../../types/user/ICreateUserBody";
 
 export async function createUser(body: ICreateUserBody) {
   const { data } = await api.post("/users", body);
