@@ -1,8 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
-import { editUser, IEditUserBody } from "../api/users/edit-user";
+import { editUser } from "../api/users/edit-user";
 import { USERS } from "../constants/queries";
+import { IEditUserBody } from "../types/user/IEditUserBody";
 
 export const useEditUser = () => {
   const queryClient = useQueryClient();

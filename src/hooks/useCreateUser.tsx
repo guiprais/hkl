@@ -1,8 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
-import { createUser, ICreateUserBody } from "../api/users/create-user";
+import { createUser } from "../api/users/create-user";
 import { USERS } from "../constants/queries";
+import { ICreateUserBody } from "../types/user/ICreateUserBody";
 
 export const useCreateUser = () => {
   const queryClient = useQueryClient();
