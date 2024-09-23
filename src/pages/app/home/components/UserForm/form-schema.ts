@@ -17,4 +17,12 @@ export const formSchema = z.object({
   address: z.string().optional(),
 });
 
+export const defaultValues = {
+  name: "",
+  cpf: "",
+  email: "",
+  phone: "",
+  address: "",
+};
+
 export type FormSchema = z.infer<typeof formSchema>;
