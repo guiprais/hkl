@@ -1,13 +1,5 @@
 import { api } from "../../lib/axios";
-
-export interface IEditUserBody {
-  id: string;
-  name?: string;
-  cpf?: string;
-  email?: string;
-  phone?: string;
-  address?: string;
-}
+import { IEditUserBody } from "../../types/user/IEditUserBody";
 
 export async function editUser(body: IEditUserBody) {
   const { id, ...bodyWithoutId } = body;
