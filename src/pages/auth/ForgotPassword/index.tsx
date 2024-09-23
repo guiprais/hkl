@@ -5,7 +5,10 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import OutlinedInput from "@mui/material/OutlinedInput";
-import * as React from "react";
+import { useForm } from "react-hook-form";
+
+import { usePassword } from "../../../hooks/usePassword";
+import { FormSchema } from "./form-schema";
 
 interface ForgotPasswordProps {
   open: boolean;
@@ -16,35 +19,39 @@ export default function ForgotPassword({
   open,
   handleClose,
 }: ForgotPasswordProps) {
+  const { savePassword, login } = usePassword();
+  const { register, handleSubmit } = useForm<FormSchema>();
+
+  const onSubmit = (data: FormSchema) => {
+    savePassword(data.password);
+    handleClose();
+    login();
+  };
+
   return (
     <Dialog
       open={open}
       onClose={handleClose}
+      fullWidth
       PaperProps={{
         component: "form",
-        onSubmit: (event: React.FormEvent<HTMLFormElement>) => {
-          event.preventDefault();
-          handleClose();
-        },
+        onSubmit: handleSubmit(onSubmit),
       }}
     >
-      <DialogTitle>Reset password</DialogTitle>
+      <DialogTitle>Redefinir a senha</DialogTitle>
       <DialogContent
         sx={{ display: "flex", flexDirection: "column", gap: 2, width: "100%" }}
       >
-        <DialogContentText>
-          Insira o email da sua conta, e nós lhe enviaremos um link para
-          redefinir sua senha.
-        </DialogContentText>
+        <DialogContentText>Insira a nova senha.</DialogContentText>
         <OutlinedInput
+          {...register("password")}
           autoFocus
           required
           margin="dense"
-          id="email"
-          name="email"
-          label="Email address"
-          placeholder="Email address"
-          type="email"
+          id="password"
+          name="password"
+          placeholder="Senha"
+          type="password"
           fullWidth
         />
       </DialogContent>
