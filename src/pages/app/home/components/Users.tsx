@@ -14,7 +14,6 @@ import { useGetUsers } from "../../../../hooks/useGetUsers";
 
 export const Users = () => {
   const { data: users, isLoading } = useGetUsers();
-  console.log("🔥 ~ Users ~ users:", users);
 
   if (isLoading) return <div>Carregando...</div>;
 
@@ -32,7 +31,7 @@ export const Users = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {users?.data?.map((user) => (
+          {users?.map((user) => (
             <TableRow key={user.id}>
               <TableCell>{user.name}</TableCell>
               <TableCell>{user.cpf}</TableCell>
