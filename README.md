@@ -87,7 +87,6 @@ Para buildar o projeto:
 
 ## Possíveis Melhorias
 
-- [ ] Adicionar testes
-- [ ] Adicionar storybook
-- [ ] Adicionar E2E tests
-- [ ] Implementar paginação
+- Adicionar testes
+- Adicionar E2E tests
+- Implementar paginação
