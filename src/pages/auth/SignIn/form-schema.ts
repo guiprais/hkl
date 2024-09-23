@@ -8,4 +8,9 @@ export const formSchema = z.object({
   password: z.string().min(1, "A senha é obrigatória"),
 });
 
+export const defaultValues = {
+  email: "",
+  password: "",
+};
+
 export type FormSchema = z.infer<typeof formSchema>;
