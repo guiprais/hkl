@@ -1,3 +1,21 @@
+import { Box, Container, Typography } from "@mui/material";
+
+import { Users } from "./components/Users";
+
 export const Home = () => {
-  return <div>Home</div>;
+  return (
+    <Container>
+      <Box sx={{ my: 4 }}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          Formulário de Cadastro/Atualização
+        </Typography>
+      </Box>
+      <Box sx={{ my: 4 }}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          Lista de Usuários
+        </Typography>
+        <Users />
+      </Box>
+    </Container>
+  );
 };
