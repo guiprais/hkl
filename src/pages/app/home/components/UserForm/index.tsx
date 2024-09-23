@@ -12,10 +12,15 @@ import { defaultValues, FormSchema, formSchema } from "./form-schema";
 
 interface UserFormProps {
   user?: IUser;
+  setUser?: (user: IUser | null) => void;
   closeDialog?: () => void;
 }
 
-export const UserForm: React.FC<UserFormProps> = ({ user, closeDialog }) => {
+export const UserForm: React.FC<UserFormProps> = ({
+  user,
+  setUser,
+  closeDialog,
+}) => {
   const { mutateAsync: createUser } = useCreateUser();
   const { mutateAsync: editUser } = useEditUser();
 
@@ -25,14 +30,18 @@ export const UserForm: React.FC<UserFormProps> = ({ user, closeDialog }) => {
   });
 
   const onSubmit = async (data: FormSchema) => {
-    await createUser(data);
-    reset(defaultValues);
-
     if (user) {
       await editUser({ ...data, id: user.id });
     } else {
       await createUser(data);
     }
+
+    reset(defaultValues);
+
+    if (setUser) {
+      setUser(null);
+    }
+
     if (closeDialog) {
       closeDialog();
     }
