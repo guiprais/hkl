@@ -9,20 +9,24 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { Controller, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
+import { ROUTES } from "../../../constants/routes";
+import { usePassword } from "../../../hooks/usePassword";
 import ColorModeSelect from "../../../lib/material/ColorModeSelect";
 import ForgotPassword from "../ForgotPassword";
 import { Card } from "./components/Card";
 import { SignInContainer } from "./components/SignInContainer";
-import { FormSchema, formSchema } from "./form-schema";
+import { defaultValues, FormSchema, formSchema } from "./form-schema";
 
 export function SignIn() {
+  const { password, login } = usePassword();
+  const navigate = useNavigate();
+
   const { control, handleSubmit } = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
+    defaultValues: defaultValues,
   });
 
   const [open, setOpen] = React.useState(false);
@@ -36,7 +40,13 @@ export function SignIn() {
   };
 
   const onSubmit = (data: FormSchema) => {
-    console.log("🔥 ~ onSubmit ~ data:", data);
+    if (data.password === password) {
+      login();
+      toast.success("Bem vindo!");
+      navigate(ROUTES.PRIVATE);
+    } else {
+      toast.error("Usuário ou senha incorreta");
+    }
   };
 
   return (
