@@ -6,8 +6,7 @@ export const formSchema = z.object({
     .min(1, "Nome é obrigatório"),
   cpf: z
     .string({ required_error: "CPF é obrigatório" })
-    .min(11, "CPF deve ter 11 dígitos")
-    .max(11, "CPF deve ter 11 dígitos"),
+    .min(11, "CPF deve ter 11 dígitos"),
   email: z
     .string({ required_error: "Email é obrigatório" })
     .email("Email inválido"),
