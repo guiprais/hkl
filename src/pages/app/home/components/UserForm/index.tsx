@@ -2,16 +2,21 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Box, FormControl, TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 
+import { useCreateUser } from "../../../../../hooks/useCreateUser";
 import { StyledButton } from "../StyledBox";
-import { FormSchema, formSchema } from "./form-schema";
+import { defaultValues, FormSchema, formSchema } from "./form-schema";
 
 export const UserForm = () => {
-  const { control, handleSubmit } = useForm<FormSchema>({
+  const { mutateAsync: createUser } = useCreateUser();
+
+  const { control, handleSubmit, reset } = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
+    defaultValues: defaultValues,
   });
 
-  const onSubmit = (data: FormSchema) => {
-    console.log(data);
+  const onSubmit = async (data: FormSchema) => {
+    await createUser(data);
+    reset(defaultValues);
   };
 
   return (
